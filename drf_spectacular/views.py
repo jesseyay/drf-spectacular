@@ -83,7 +83,7 @@ class SpectacularSwaggerView(APIView):
 
     @extend_schema(exclude=True)
     def get(self, request, *args, **kwargs):
-        schema_url = self.url or get_relative_url(reverse(self.url_name, request=request, kwargs={"tenant": request.tenant.domain}))
+        schema_url = self.url or get_relative_url(reverse(self.url_name, request=request, kwargs={"tenant": request.tenant.domain_set.first().domain}))
         return Response(
             data={
                 'dist': spectacular_settings.SWAGGER_UI_DIST,
